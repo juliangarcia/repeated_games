@@ -58,8 +58,6 @@ public class RepeatedGame {
 		return playOnce(playerOne, playerTwo, 0.0);
 	}
 
-	// TODO: these methods should act on an interface and not on explicit
-	// automata.
 	/**
 	 * Payoff with a lot of noise, just one interaction takes place.
 	 * 
@@ -86,8 +84,9 @@ public class RepeatedGame {
 				actionsPlayerTwo, mistakeProbability);
 		payoffOne = payoffOne + stageResult[0];
 		payoffTwo = payoffTwo + stageResult[1];
-
-		while (Random.bernoulliTrial(continuationProbability)) {
+		
+		int rounds = Random.simulateGeometricDistribution(1.0-continuationProbability);
+		for (int i = 0; i < rounds; i++) {
 			stageResult = stage(playerOne, playerTwo, actionsPlayerOne,
 					actionsPlayerTwo, mistakeProbability);
 			payoffOne = payoffOne + stageResult[0];
