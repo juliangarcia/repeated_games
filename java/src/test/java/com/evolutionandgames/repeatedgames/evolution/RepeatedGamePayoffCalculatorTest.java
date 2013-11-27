@@ -30,7 +30,7 @@ public class RepeatedGamePayoffCalculatorTest {
 		calculator.calculatePayoffs(population);
 		for (int i = 0; i < population.getSize(); i++) {
 			double payoff = ((ExtensivePopulation)population).getPayoffOfAgent(i);
-			assertEquals(population.getSize()-1.0, payoff, 0.0);
+			assertEquals(1.0, payoff, 0.0);
 		}
 	}
 	

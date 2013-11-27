@@ -28,7 +28,8 @@ public class RepeatedGamePayoffCalculator implements AgentBasedPayoffCalculator 
 
 	private void calculatePayoffsWithoutMatchingNoise(
 			AgentBasedPopulation population) {
-		for (int i = 0; i < population.getSize() - 1; i = i + 1) {
+		int popSize = population.getSize();
+		for (int i = 0; i < popSize - 1; i = i + 1) {
 			for (int j = i + 1; j < population.getSize(); j++) {
 				// i is focal, we set the fitness of i and i+1
 				RepeatedStrategy focal = (RepeatedStrategy) ((ExtensivePopulationImpl) population)
@@ -51,6 +52,13 @@ public class RepeatedGamePayoffCalculator implements AgentBasedPayoffCalculator 
 
 			}
 
+		}
+		double scale = (double) popSize -1.0;
+		for (int i = 0; i < popSize; i++) {
+			double focalPrevious = ((ExtensivePopulation) population)
+					.getPayoffOfAgent(i);
+			((ExtensivePopulation) population).setPayoffOfAgent(i,
+					focalPrevious/scale);
 		}
 
 	}
