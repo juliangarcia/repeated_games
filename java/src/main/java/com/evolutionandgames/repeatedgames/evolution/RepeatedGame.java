@@ -94,8 +94,8 @@ public class RepeatedGame {
 		}
 
 		double[] ans = new double[2];
-		ans[0] = (1.0 - continuationProbability) * payoffOne;
-		ans[1] = (1.0 - continuationProbability) * payoffTwo;
+		ans[0] = payoffOne/(double)rounds;
+		ans[1] = payoffTwo/(double)rounds;
 		return ans;
 	}
 
