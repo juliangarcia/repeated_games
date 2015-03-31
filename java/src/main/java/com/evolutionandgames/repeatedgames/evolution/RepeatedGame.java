@@ -84,18 +84,18 @@ public class RepeatedGame {
 				actionsPlayerTwo, mistakeProbability);
 		payoffOne = payoffOne + stageResult[0];
 		payoffTwo = payoffTwo + stageResult[1];
-		
-		int rounds = Random.simulateGeometricDistribution(1.0-continuationProbability);
-		for (int i = 0; i < rounds; i++) {
+		int rounds = 1;
+
+		while (Random.bernoulliTrial(continuationProbability)) {
 			stageResult = stage(playerOne, playerTwo, actionsPlayerOne,
 					actionsPlayerTwo, mistakeProbability);
 			payoffOne = payoffOne + stageResult[0];
 			payoffTwo = payoffTwo + stageResult[1];
+			rounds++;
 		}
-
 		double[] ans = new double[2];
-		ans[0] = payoffOne/(double)(rounds + 1.0);
-		ans[1] = payoffTwo/(double)(rounds + 1.0);
+		ans[0] = payoffOne/(double)(rounds); 
+		ans[1] = payoffTwo/(double)(rounds); 
 		return ans;
 	}
 
